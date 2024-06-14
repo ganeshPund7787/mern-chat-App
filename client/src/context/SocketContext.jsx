@@ -21,6 +21,8 @@ export const SocketContextProvider = ({ children }) => {
         },
       });
 
+      // http://localhost:5173
+
       setSocket(socket);
 
       // socket.on is used to listen to the events. can be used both on client side and server side

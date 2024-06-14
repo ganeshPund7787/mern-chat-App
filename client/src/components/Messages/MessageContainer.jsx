@@ -18,10 +18,14 @@ const MessageContainer = () => {
         <NoChatSelected />
       ) : (
         <>
-          <div className="bg-slate-500 px-4 py-2 mb-2">
-            <span className="label-text">To:</span>{" "}
+          <div className="flex items-center gap-3 bg-slate-500 px-4 py-2 mb-2">
+            <img
+              src={selectedConversation.profilePic}
+              className="h-10 w-10 rounded-full"
+              alt="IMG"
+            />
             <span className="text-gray-900 font-bold">
-              {selectedConversation.fullname}
+              {selectedConversation.username}
             </span>
           </div>
           <Messages />

@@ -13,11 +13,11 @@ export const signUp = async (req, res, next) => {
 
         const hashPassword = bcryptjs.hashSync(password, 10);
 
-        // const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-        // const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
-        const boyProfilePic = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKKOdmJz8Z2pDtYgFgR2u9spABvNNPKYYtGw&s`;
-        const girlProfilePic = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHEJ-8GyKlZr5ZmEfRMmt5nR4tH_aP-crbgg&s`;
+        // const boyProfilePic = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKKOdmJz8Z2pDtYgFgR2u9spABvNNPKYYtGw&s`;
+        // const girlProfilePic = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHEJ-8GyKlZr5ZmEfRMmt5nR4tH_aP-crbgg&s`;
 
         const newUser = await User.create({
             fullname,
