@@ -11,7 +11,7 @@ import ProtectRoute from "./components/ProtectRoute.jsx";
 function App() {
   const { authUser } = useAuthContex();
   return (
-    <div className="p-4 h-screen flex items-center justify-center">
+    <div className="p-4 border h-screen flex items-center justify-center">
       <Toaster />
       <Routes>
         <Route element={<ProtectRoute />}>

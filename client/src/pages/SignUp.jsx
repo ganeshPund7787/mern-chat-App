@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GenderCheckBox from "../components/GenderCheckBox";
 import { Link } from "react-router-dom";
 import { useSignUp } from "../Hooks/useSignUp.js";
+import { Button } from "@chakra-ui/react";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -97,8 +98,9 @@ const SignUp = () => {
           </Link>
 
           <div className="">
-            <button
+            <Button
               disabled={loading}
+              type="submit"
               className="btn btn-block btn-sm p-2 mt-2"
             >
               {loading ? (
@@ -106,7 +108,7 @@ const SignUp = () => {
               ) : (
                 "Sign Up"
               )}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

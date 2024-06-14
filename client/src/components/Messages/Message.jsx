@@ -15,6 +15,8 @@ const Message = ({ message }) => {
   const bubbleBgColor = fromMe ? "bg-blue-500" : "";
   const shakeClass = message.shouldShake ? "shake" : "";
 
+  console.log(message.message);
+
   return (
     <div className={`chat ${chatClassName}`}>
       <div className="chat-image avatar">
@@ -23,11 +25,21 @@ const Message = ({ message }) => {
         </div>
       </div>
 
-      <div
-        className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
-      >
-        {message.message}
-      </div>
+      {message.message && (
+        <div
+          className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
+        >
+          {message.message}
+        </div>
+      )}
+      {message.img && (
+        <div className="flex w-[200px] mt-5">
+          <img
+            src="https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Message Img"
+          />
+        </div>
+      )}
       <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">
         {formatedTime}
       </div>

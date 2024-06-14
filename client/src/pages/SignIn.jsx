@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../Hooks/useLogin";
+import { Button } from "@chakra-ui/react";
 
 const SignIn = () => {
   const [username, setUsername] = useState();
@@ -22,6 +23,7 @@ const SignIn = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-10">
           <div className="">
             <input
+              required
               type="text"
               placeholder="Enter username"
               value={username}
@@ -32,6 +34,7 @@ const SignIn = () => {
 
           <div className="">
             <input
+              required
               type="password"
               placeholder="Enter password"
               value={password}
@@ -48,13 +51,17 @@ const SignIn = () => {
           </Link>
 
           <div className="">
-            <button disabled={loading} className="btn btn-block btn-sm mt-2">
+            <Button
+              disabled={loading}
+              type="submit"
+              className="btn btn-block btn-sm mt-2"
+            >
               {loading ? (
                 <span className="text-red-600 loading loading-spinner"></span>
               ) : (
                 "Login"
               )}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

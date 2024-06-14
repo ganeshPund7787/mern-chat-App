@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("./assets/bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
 /* dark mode looking scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
