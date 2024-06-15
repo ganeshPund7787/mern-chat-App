@@ -1,17 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BsSend } from "react-icons/bs";
 import useSendMessage from "../../Hooks/useSendMessage";
 import { BsFillImageFill } from "react-icons/bs";
 import { IoSend } from "react-icons/io5";
 
 import useUploadImg from "../../Hooks/useUploadImg";
+import useStoreImg from "../../Hooks/useStoreImg";
 
 const MessageInput = () => {
   const [message, setMessage] = useState("");
   const { loading, sendMessage } = useSendMessage();
   const imgRef = useRef(null);
-  const { uploadImage, imageUrl } = useUploadImg();
+  const { uploadImage, imageUrl, setImageUrl } = useUploadImg();
   const [file, setFile] = useState(undefined);
+  const { storeImgBackend } = useStoreImg();
 
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -20,10 +22,17 @@ const MessageInput = () => {
     setMessage("");
   };
 
+  useEffect(() => {
+    if (file) {
+      uploadImage(file);
+    }
+  }, [file]);
+
   const handleImgSend = async () => {
     document.getElementById("my_modal_3").close();
-    uploadImage(file);
-    await sendMessage(imageUrl);
+    // console.log("imageUrl", imageUrl);
+    await storeImgBackend(imageUrl);
+    setImageUrl("");
     setFile(null);
   };
 

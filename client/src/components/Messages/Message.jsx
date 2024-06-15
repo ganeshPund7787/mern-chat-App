@@ -34,10 +34,7 @@ const Message = ({ message }) => {
       )}
       {message.img && (
         <div className="flex w-[200px] mt-5">
-          <img
-            src="https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt="Message Img"
-          />
+          <img src={message.img} alt="Message Img" />
         </div>
       )}
       <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">

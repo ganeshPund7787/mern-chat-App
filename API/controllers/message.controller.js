@@ -77,6 +77,7 @@ export const sendImgMessage = async (req, res, next) => {
             // io.to(<socket._id>).emit() used to send events to specific client
             io.to(receiverSocketId).emit("newMessage", newImgMessage);
         }
+
         res.status(201).json(newImgMessage);
     } catch (error) {
         next(error)
@@ -95,6 +96,7 @@ export const getMessages = async (req, res, next) => {
         if (!conversation) return res.status(200).json([]);
 
         const messages = conversation.messages
+        console.log(messages)
         res.status(200).json(messages);
     } catch (error) {
         next(error)

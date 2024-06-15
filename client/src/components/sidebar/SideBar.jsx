@@ -2,6 +2,7 @@ import React from "react";
 import SearchInput from "./SearchInput";
 import Conversations from "./Conversations";
 import LogOutBtn from "./LogOutBtn";
+import { Button } from "@chakra-ui/react";
 
 const SideBar = () => {
   return (

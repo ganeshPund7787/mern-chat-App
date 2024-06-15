@@ -1,13 +1,16 @@
 import { getBytes, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage"
 import { useState } from "react"
 import { app } from "../firebase.js"
+import toast from "react-hot-toast";
+
 
 const useUploadImg = () => {
-    const [filePer, setFilePer] = useState();
-    const [imageUrl, setImageUrl] = useState();
+    const [filePer, setFilePer] = useState(0);
+    const [imageUrl, setImageUrl] = useState("");
+    console.log(filePer)
+    console.log(imageUrl)
 
     const uploadImage = (file) => {
-
         const storage = getStorage(app)
         const fileName = new Date().getTime() + file.name;
         const storageRef = ref(storage, fileName);
@@ -30,9 +33,11 @@ const useUploadImg = () => {
 
             }
         )
+
         return
     }
-    return { uploadImage, imageUrl }
+
+    return { uploadImage, imageUrl, setImageUrl }
 }
 
 export default useUploadImg
