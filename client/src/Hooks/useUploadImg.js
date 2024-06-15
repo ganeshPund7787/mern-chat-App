@@ -7,8 +7,8 @@ import toast from "react-hot-toast";
 const useUploadImg = () => {
     const [filePer, setFilePer] = useState(0);
     const [imageUrl, setImageUrl] = useState("");
-    console.log(filePer)
-    console.log(imageUrl)
+    // console.log(filePer)
+    // console.log(imageUrl)
 
     const uploadImage = (file) => {
         const storage = getStorage(app)
@@ -21,7 +21,6 @@ const useUploadImg = () => {
             (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 setFilePer(Math.round(progress))
-                console.log("progress : ", progress)
             },
             (error) => {
                 console.log(error)
@@ -29,6 +28,7 @@ const useUploadImg = () => {
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downLoadUrl) => {
                     setImageUrl(downLoadUrl);
+                    setFilePer(0)
                 })
 
             }
@@ -37,7 +37,7 @@ const useUploadImg = () => {
         return
     }
 
-    return { uploadImage, imageUrl, setImageUrl }
+    return { uploadImage, imageUrl, setImageUrl, filePer }
 }
 
 export default useUploadImg

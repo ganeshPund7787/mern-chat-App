@@ -33,11 +33,11 @@ const Message = ({ message }) => {
         </div>
       )}
       {message.img && (
-        <div className="flex w-[200px] mt-5">
+        <div className="flex w-[200px] mt-5 outline rounded-md">
           <img src={message.img} alt="Message Img" />
         </div>
       )}
-      <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">
+      <div className="chat-footer opacity-50 text-xs flex gap-1 mt-2 items-center">
         {formatedTime}
       </div>
     </div>

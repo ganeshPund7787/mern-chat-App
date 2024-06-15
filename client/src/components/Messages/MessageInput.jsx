@@ -11,9 +11,11 @@ const MessageInput = () => {
   const [message, setMessage] = useState("");
   const { loading, sendMessage } = useSendMessage();
   const imgRef = useRef(null);
-  const { uploadImage, imageUrl, setImageUrl } = useUploadImg();
+  const { uploadImage, imageUrl, setImageUrl, filePer } = useUploadImg();
   const [file, setFile] = useState(undefined);
   const { storeImgBackend } = useStoreImg();
+
+  console.log("File uploading : ", filePer, "%");
 
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,6 @@ const MessageInput = () => {
 
   const handleImgSend = async () => {
     document.getElementById("my_modal_3").close();
-    // console.log("imageUrl", imageUrl);
     await storeImgBackend(imageUrl);
     setImageUrl("");
     setFile(null);
@@ -93,7 +94,11 @@ const MessageInput = () => {
             <div className="modal-action">
               {file ? (
                 <button className="btn btn-primary" onClick={handleImgSend}>
-                  Send
+                  {filePer !== 100 ? (
+                    <div className="loading loading-spinner"></div>
+                  ) : (
+                    "send"
+                  )}
                 </button>
               ) : (
                 <button
