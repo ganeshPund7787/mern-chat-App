@@ -4,10 +4,14 @@ import useSendMessage from "../../Hooks/useSendMessage";
 import { BsFillImageFill } from "react-icons/bs";
 import { IoSend } from "react-icons/io5";
 
+import useUploadImg from "../../Hooks/useUploadImg";
+
 const MessageInput = () => {
   const [message, setMessage] = useState("");
   const { loading, sendMessage } = useSendMessage();
-  const imgRef = useRef();
+  const imgRef = useRef(null);
+  const { uploadImage, imageUrl } = useUploadImg();
+  const [file, setFile] = useState(undefined);
 
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -15,63 +19,86 @@ const MessageInput = () => {
     await sendMessage(message);
     setMessage("");
   };
-  return (
-    <div className="flex gap-5 cursor-pointer">
-      <form onSubmit={handlSubmit} className="w-[85%]">
-        <div className="w-full relative">
-          <input
-            type="text"
-            name=""
-            id=""
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="send a message"
-            className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
-          />
-          <button
-            type="submit"
-            className="absolute inset-y-0 end-0 flex items-center pe-3"
-          >
-            {loading ? (
-              <div className="loading loading-spinner"></div>
-            ) : (
-              <BsSend />
-            )}
-          </button>
-        </div>
-      </form>
-      <div className="flex items-center text-black">
-        <button
-          className="btn"
-          onClick={() => document.getElementById("my_modal_3").showModal()}
-        >
-          <BsFillImageFill />
-          <input type="file" name="" id="" />
-        </button>
-      </div>
-      {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
-          <h3 className="font-bold text-lg"></h3>
-          <div className="flex mt-5">
-            <img
-              src="https://images.pexels.com/photos/17565977/pexels-photo-17565977/free-photo-of-legs-in-striped-socks-and-sneakers.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt=""
+  const handleImgSend = async () => {
+    document.getElementById("my_modal_3").close();
+    uploadImage(file);
+    await sendMessage(imageUrl);
+    setFile(null);
+  };
+
+  return (
+    <>
+      <div className="flex gap-3 items-center cursor-pointer">
+        <form onSubmit={handlSubmit} className="w-[90%] ml-2">
+          <div className="w-full relative">
+            <input
+              type="text"
+              name=""
+              id=""
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="send a message"
+              className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
             />
+            <button
+              type="submit"
+              className="absolute inset-y-0 end-0 flex items-center pe-3"
+            >
+              {loading ? (
+                <div className="loading loading-spinner"></div>
+              ) : (
+                <BsSend />
+              )}
+            </button>
           </div>
-          <div className="flex justify-end mt-5">
-            <IoSend size={"20"} />
-          </div>
+        </form>
+        <div className="flex">
+          <button
+            className="btn"
+            onClick={() => document.getElementById("my_modal_3").showModal()}
+          >
+            <BsFillImageFill size={20} onClick={() => imgRef.current.click()} />
+          </button>
+
+          <input
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            hidden
+            ref={imgRef}
+            id=""
+          />
         </div>
-      </dialog>
-    </div>
+
+        <dialog id="my_modal_3" className="modal">
+          <div className="modal-box relative">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-lg">Image</h3>
+            <div className="">
+              <img src={file} alt="" />
+            </div>
+            <div className="modal-action">
+              {file ? (
+                <button className="btn btn-primary" onClick={handleImgSend}>
+                  Send
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => document.getElementById("my_modal_3").close()}
+                >
+                  close
+                </button>
+              )}
+            </div>
+          </div>
+        </dialog>
+      </div>
+    </>
   );
 };
 
