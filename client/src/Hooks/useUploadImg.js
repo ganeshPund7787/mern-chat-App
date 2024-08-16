@@ -1,14 +1,12 @@
-import { getBytes, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage"
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage"
 import { useState } from "react"
 import { app } from "../firebase.js"
-import toast from "react-hot-toast";
+
 
 
 const useUploadImg = () => {
     const [filePer, setFilePer] = useState(0);
     const [imageUrl, setImageUrl] = useState("");
-    // console.log(filePer)
-    // console.log(imageUrl)
 
     const uploadImage = (file) => {
         const storage = getStorage(app)

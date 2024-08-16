@@ -4,6 +4,7 @@ import MessageInput from "./MessageInput";
 import { TiMessages } from "react-icons/ti";
 import useConversation from "../../zustand/useConversation";
 import { useAuthContex } from "../../context/AuthContext";
+import { FaArrowCircleRight } from "react-icons/fa";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
@@ -13,20 +14,29 @@ const MessageContainer = () => {
   }, []);
 
   return (
-    <div className="md:min-w-[450px] flex flex-col">
+    <div className="md:min-w-[450px] flex flex-col h-[40rem] sm:h-full min-w-[20rem]">
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
-          <div className="flex items-center gap-3 bg-slate-500 px-4 py-2 mb-2">
-            <img
-              src={selectedConversation.profilePic}
-              className="h-10 w-10 rounded-full"
-              alt="IMG"
-            />
-            <span className="text-gray-900 font-bold">
-              {selectedConversation.username}
-            </span>
+          <div className="flex items-center justify-between gap-3 bg-slate-500 px-4 py-2 mb-2">
+            <div className="flex items-center justify-between sm:justify-normal gap-3 bg-slate-500 px-4 py-2 mb-2">
+              <img
+                src={selectedConversation.profilePic}
+                className="h-10 w-10 rounded-full"
+                alt="IMG"
+              />
+              <span className="text-gray-900 font-bold">
+                {selectedConversation.username}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSelectedConversation(null)}
+              className=""
+            >
+              <FaArrowCircleRight size={35} />
+            </button>
           </div>
           <Messages />
           <MessageInput />

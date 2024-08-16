@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { BsSend } from "react-icons/bs";
 import useSendMessage from "../../Hooks/useSendMessage";
 import { BsFillImageFill } from "react-icons/bs";
-import { IoSend } from "react-icons/io5";
 
 import useUploadImg from "../../Hooks/useUploadImg";
 import useStoreImg from "../../Hooks/useStoreImg";
@@ -11,11 +10,10 @@ const MessageInput = () => {
   const [message, setMessage] = useState("");
   const { loading, sendMessage } = useSendMessage();
   const imgRef = useRef(null);
-  const { uploadImage, imageUrl, setImageUrl, filePer } = useUploadImg();
+  const { uploadImage, imageUrl, setImageUrl, imgLoading, setImgLoading } =
+    useUploadImg();
   const [file, setFile] = useState(undefined);
   const { storeImgBackend } = useStoreImg();
-
-  console.log("File uploading : ", filePer, "%");
 
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -31,10 +29,12 @@ const MessageInput = () => {
   }, [file]);
 
   const handleImgSend = async () => {
+    setImgLoading(true);
     document.getElementById("my_modal_3").close();
     await storeImgBackend(imageUrl);
+    setImgLoading(false);
     setImageUrl("");
-    setFile(null);
+    setFile(undefined);
   };
 
   return (
@@ -66,9 +66,13 @@ const MessageInput = () => {
         <div className="flex">
           <button
             className="btn"
-            onClick={() => document.getElementById("my_modal_3").showModal()}
+            // onClick={() => document.getElementById("my_modal_3").showModal()}
           >
-            <BsFillImageFill size={20} onClick={() => imgRef.current.click()} />
+            <BsFillImageFill
+              size={20}
+              onClick={() => alert("Not availabel now")}
+            />
+            {/* onClick={() => imgRef.current.click()} */}
           </button>
 
           <input
@@ -94,7 +98,7 @@ const MessageInput = () => {
             <div className="modal-action">
               {file ? (
                 <button className="btn btn-primary" onClick={handleImgSend}>
-                  {filePer !== 100 ? (
+                  {imgLoading ? (
                     <div className="loading loading-spinner"></div>
                   ) : (
                     "send"

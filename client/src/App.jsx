@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useAuthContex } from "./context/AuthContext.jsx";
 import ProtectRoute from "./components/ProtectRoute.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   const { authUser } = useAuthContex();
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route element={<ProtectRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/user-profile" element={<Profile />} />
         </Route>
         <Route
           path="/login"
