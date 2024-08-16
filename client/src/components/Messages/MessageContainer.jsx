@@ -33,7 +33,7 @@ const MessageContainer = () => {
             <button
               type="button"
               onClick={() => setSelectedConversation(null)}
-              className=""
+              className="md:hidden"
             >
               <FaArrowCircleRight size={35} />
             </button>
