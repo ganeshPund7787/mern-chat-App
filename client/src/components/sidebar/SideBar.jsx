@@ -10,9 +10,9 @@ import { useAuthContex } from "../../context/AuthContext";
 const SideBar = () => {
   const { authUser } = useAuthContex();
   return (
-    <div className="border-r border-slate-500 p-4 flex flex-col h-[40rem] sm:h-full">
+    <div className="border-r  bg-clip-padding  border-slate-500 p-4 flex flex-col h-[40rem] overflow-hidden sm:h-full">
       <SearchInput />
-      <hr className="my-6 opacity-30" />
+      <hr className="overflow-y-auto my-6 opacity-30" />
       <Conversations />
       <div className="flex items-center justify-between flex-row gap-7 pt-2">
         <LogOutBtn />

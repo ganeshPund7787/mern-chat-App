@@ -63,7 +63,7 @@ const MessageInput = () => {
             </button>
           </div>
         </form>
-        <div className="flex">
+        {/* <div className="flex">
           <button
             className="btn"
             // onClick={() => document.getElementById("my_modal_3").showModal()}
@@ -72,7 +72,7 @@ const MessageInput = () => {
               size={20}
               onClick={() => alert("Not availabel now")}
             />
-            {/* onClick={() => imgRef.current.click()} */}
+            onClick={() => imgRef.current.click()}
           </button>
 
           <input
@@ -82,7 +82,7 @@ const MessageInput = () => {
             ref={imgRef}
             id=""
           />
-        </div>
+        </div> */}
 
         <dialog id="my_modal_3" className="modal">
           <div className="modal-box relative">

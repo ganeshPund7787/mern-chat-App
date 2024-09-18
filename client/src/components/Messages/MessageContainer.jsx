@@ -18,7 +18,7 @@ const MessageContainer = () => {
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
-        <>
+        <div className="flex flex-col h-[71vh] md:h-full justify-between ">
           <div className="flex items-center justify-between gap-3 bg-slate-500 px-4 py-2 mb-2">
             <div className="flex items-center justify-between sm:justify-normal gap-3 bg-slate-500 px-4 py-2 mb-2">
               <img
@@ -40,7 +40,7 @@ const MessageContainer = () => {
           </div>
           <Messages />
           <MessageInput />
-        </>
+        </div>
       )}
     </div>
   );
